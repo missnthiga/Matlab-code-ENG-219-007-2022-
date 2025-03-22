@@ -1,0 +1,23 @@
+% Define DT signals
+N = 10;
+n = 0:N-1;
+x = cos(2*pi/10*n);
+y = sin(2*pi/10*n);
+
+% Inner product (DT)
+inner_product_DT = sum(x .* y)
+
+% Energy (DT)
+energy_x_DT = sum(x.^2)
+
+% Continuous-Time calculations
+syms t;
+x_t = sin(2*pi*t);
+y_t = cos(2*pi*t);
+
+% Inner product (CT)
+inner_product_CT = int(x_t * y_t, t, 0, 1)
+
+% Power (CT)
+power_x_CT = int(x_t^2, t, 0, 1)
+power_x_CT = power_x_CT / 1
