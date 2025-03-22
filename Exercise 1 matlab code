@@ -1,0 +1,95 @@
+%SIGMNUM FUNCTION sgn(t)
+t = -5:0.01:5;
+sgn_t = sign(t);
+figure;
+plot(t, sgn_t, 'LineWidth', 2);
+xlabel('t');
+ylabel('sgn(t)');
+title('Signum Function');
+grid on;
+ylim([-1.5, 1.5]);
+%RECTANGULAR FUNCTION rect(t)
+t = -2:0.01:2;
+rect_t = abs(t) <= 0.5;
+figure;
+plot(t, rect_t, 'LineWidth', 2);
+xlabel('t');
+ylabel('rect(t)');
+title('Rectangular Function');
+grid on;
+ylim([-0.1, 1.1]);
+%TRIANGULAR FUNCTION tri(t)
+t = -2:0.01:2;
+tri_t = (1 - abs(t)) .* (abs(t) <= 1);
+figure;
+plot(t, tri_t, 'LineWidth', 2);
+xlabel('t');
+ylabel('tri(t)');
+title('Triangular Function');
+grid on;
+ylim([-0.1, 1.1]);
+%SINC FUNCTION sinc(t)
+t = -10:0.01:10;
+sinc_t = sinc(t);  % MATLAB's sinc function is sin(pi*t)/(pi*t)
+figure;
+plot(t, sinc_t, 'LineWidth', 2);
+xlabel('t');
+ylabel('sinc(t)');
+title('Sinc Function');
+grid on;
+%IMPULSE FUNCTION 
+n = -5:5;
+delta_n = (n == 0);
+figure;
+stem(n, delta_n, 'filled');
+xlabel('n');
+ylabel('\delta[n]');
+title('Impulse Function');
+grid on;
+%STEP FUNCTION 
+n = -5:10;
+step_n = (n >= 0);
+figure;
+stem(n, step_n, 'filled');
+xlabel('n');
+ylabel('u[n]');
+title('Step Function');
+grid on;
+%SQUARE IMPULSE 
+N = 5;
+n = 0:10;
+square_n = (n >= 0) & (n < N);
+figure;
+stem(n, square_n, 'filled');
+xlabel('n');
+ylabel('square[n]');
+title('Square Impulse');
+grid on;
+%DISCRETE EXPONENTIAL x[n] = exp(j * omega * n)
+n = 0:20;
+omega = pi/4;  % Change omega as needed
+exp_n = exp(1j * omega * n);
+figure;
+subplot(2,1,1);
+stem(n, real(exp_n), 'filled');
+xlabel('n');
+ylabel('Re(x[n])');
+title('Real Part of Discrete Exponential');
+grid on;
+
+subplot(2,1,2);
+stem(n, imag(exp_n), 'filled');
+xlabel('n');
+ylabel('Im(x[n])');
+title('Imaginary Part of Discrete Exponential');
+grid on;
+%DISCRETE COSINE x[n] = cos(omega*n)
+n = 0:20;
+omega = pi/4;  % Change omega as needed
+cos_n = cos(omega * n);
+figure;
+stem(n, cos_n, 'filled');
+xlabel('n');
+ylabel('cos(\omega n)');
+title('Discrete Cosine Function');
+grid on;
