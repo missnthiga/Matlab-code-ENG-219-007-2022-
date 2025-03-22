@@ -1,0 +1,64 @@
+clc; clear; close all;
+
+% Define parameters
+N = 16; % Total number of points
+n = 0:N-1; % Time index
+
+% Define k and l such that k + l = N
+k = 2; 
+l = N - k; 
+
+% Discrete Cosine Signals
+cos_k = cos(2*pi*k*n/N);
+cos_l = cos(2*pi*l*n/N);
+
+% Discrete Exponential Signals
+exp_k = exp(1j*2*pi*k*n/N);
+exp_l = exp(1j*2*pi*l*n/N);
+
+% Subplots for cosine signals
+figure;
+subplot(2,2,1);
+stem(n, cos_k, 'b', 'filled');
+title(['cos(2\pi ' num2str(k) 'n/N)']);
+xlabel('n'); ylabel('Amplitude');
+grid on;
+
+subplot(2,2,2);
+stem(n, cos_l, 'r', 'filled');
+title(['cos(2\pi ' num2str(l) 'n/N)']);
+xlabel('n'); ylabel('Amplitude');
+grid on;
+
+% Show that k and l represent the same frequency
+subplot(2,2,3);
+stem(n, cos_k - cos_l, 'g', 'filled');
+title('Difference: cos(2\pi kn/N) - cos(2\pi ln/N)');
+xlabel('n'); ylabel('Amplitude');
+grid on;
+
+% Subplots for exponential signals
+figure;
+subplot(2,2,1);
+stem(n, real(exp_k), 'b', 'filled');
+title(['Real Part of e^{j2\pi ' num2str(k) 'n/N}']);
+xlabel('n'); ylabel('Amplitude');
+grid on;
+
+subplot(2,2,2);
+stem(n, real(exp_l), 'r', 'filled');
+title(['Real Part of e^{j2\pi ' num2str(l) 'n/N}']);
+xlabel('n'); ylabel('Amplitude');
+grid on;
+
+subplot(2,2,3);
+stem(n, imag(exp_k), 'b', 'filled');
+title(['Imaginary Part of e^{j2\pi ' num2str(k) 'n/N}']);
+xlabel('n'); ylabel('Amplitude');
+grid on;
+
+subplot(2,2,4);
+stem(n, imag(exp_l), 'r', 'filled');
+title(['Imaginary Part of e^{j2\pi ' num2str(l) 'n/N}']);
+xlabel('n'); ylabel('Amplitude');
+grid on;
