@@ -1,0 +1,43 @@
+clc; clear; close all;
+
+% Define signals for testing linearity and time-invariance
+n = -10:10;
+x1 = sin(n);       % First test signal
+x2 = cos(n);       % Second test signal
+alpha = 2; beta = 3;
+
+% System 1: y[n] = x[n] + x[n-1]
+y1 = x1 + [0, x1(1:end-1)];
+y2 = x2 + [0, x2(1:end-1)];
+y_comb = alpha*y1 + beta*y2;
+x_comb = alpha*x1 + beta*x2;
+y_comb_test = x_comb + [0, x_comb(1:end-1)];
+
+% Check Linearity
+if isequal(y_comb, y_comb_test)
+    disp('System is Linear.');
+else
+    disp('System is Nonlinear.');
+end
+
+% Check Time-Invariance
+shift = 2;
+x_shift = [zeros(1, shift), x1(1:end-shift)]; % Shifted input
+y_shift_expected = x_shift + [0, x_shift(1:end-1)];
+y_actual = circshift(y1, shift); % Shifted output
+
+if isequal(y_shift_expected, y_actual)
+    disp('System is Time-Invariant.');
+else
+    disp('System is Time-Variant.');
+end
+
+% Stability check for summation system y[n] = sum x[k]
+x_bounded = ones(size(n)); % Example of bounded input
+y_sum = cumsum(x_bounded);
+
+if all(abs(y_sum) < Inf)
+    disp('System is Stable.');
+else
+    disp('System is Unstable.');
+end
